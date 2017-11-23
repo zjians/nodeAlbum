@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">  
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"> 
+  <title>Document</title>
+  <style>
+    .wrapper{
+      max-width:1200px;
+      margin:0 auto;
+    }
+    .title{
+      text-align: center;
+      margin:0;
+    }
+    a{
+      text-decoration: none!important;
+    }
+    .dirName{
+      height:40px;
+      width:30%;
+    }
+    .upload-group{
+
+    }
+    .upBtn{
+      border:1px solid #aaa;
+      padding:6px;
+      width:150px;
+      text-align: center;
+      margin-top:50px;
+      cursor: pointer;
+    }
+  </style>
+  <link href="/static/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">本地相册</a>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="/">全部相册 <span class="sr-only">(current)</span></a></li>
+          <li><a href="/upload">上传</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="wrapper">
+    <form action="/upload" method="post" class='row'>
+      <p>请选择要上传的文件夹</p>
+      <select name="dirName" class='dirName'>
+        <%for (var i=0;i<uploadDirList.length;i++){%>
+          <option value="<%= uploadDirList[i] %>"><%= uploadDirList[i] %></option>
+        <%}%>
+      </select>
+      <div class="upload-group">
+        <label class="upBtn" for='uploadInput'>点击选择图片</label>
+        <input type="file" id='uploadInput' name='photo'>
+      </div>
+      <input type="submit" value='提交' style='padding:5px 15px;margin-top:20px;'>
+    </form>
+  </div>
+  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+  <script src="/static/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script>
+
+  </script>
+</body>
+</html>
