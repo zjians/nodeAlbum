@@ -37,3 +37,16 @@ exports.getAlbums = (albumName) =>{
     });
   });
 }
+exports.rename = (oldPath,newPath)=>{
+  console.log(oldPath);
+  console.log(newPath);
+  return new Promise((resolve,reject)=>{
+    fs.rename(oldPath,newPath,(err)=>{
+      if(err){
+        reject(err);
+      }else{
+          resolve();
+      }
+    });
+  });
+}

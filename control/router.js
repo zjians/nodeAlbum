@@ -1,5 +1,7 @@
 const file = require('../model/file.js');
 const formidable = require('formidable');
+const util = require('util');
+const path = require('path');
 const form = new formidable.IncomingForm();
 
 exports.showDir = (req,res,next) =>{ // 读取所有文件夹
@@ -40,5 +42,22 @@ exports.upload = (req,res,next) =>{
   });
 }
 exports.doPost = (req,res) =>{
-  form.parse()
+  form.keepExtensions = true;
+  form.uploadDir =path.join(process.cwd(),'/upload');
+  form.parse(req, function(err, fields, files, next) {
+    if(err){
+      next();
+      return;
+    }
+    const oldPath = files.photo.path;
+    const extName = path.extname(files.photo.name);
+    const newPath = path.join(process.cwd(),'/public/photo/'+fields.dirName+'/'+Date.parse(new Date())+extName);
+    file.rename(oldPath,newPath).then(()=>{
+      res.send('上传成功');
+    }).catch((err)=>{
+      res.send('上传失败');
+      console.dir(err);
+    });
+  });
+  return;
 }
